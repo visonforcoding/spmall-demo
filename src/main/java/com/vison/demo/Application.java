@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.core.SpringVersion;
+import org.hibernate.Version;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -18,6 +19,7 @@ public class Application {
         System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(Application.class, args);
         log.info(String.format("spring version is : %s",SpringVersion.getVersion()));
+        log.info(String.format("hibernate version is : %s",Version.getVersionString()));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.vison.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
@@ -17,10 +18,11 @@ public class Order extends BaseEntity {
 
     private Integer orderPriceFen;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT),
-            inverseForeignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
-    private Set<Goods> goods;
+
+    @OneToMany(mappedBy = "order")
+    @Transient
+    @JsonIgnoreProperties(value = {"order"})
+    private Set<OrderGoods> orderGoods;
 
     public String getOrderNo() {
         return orderNo;
@@ -54,11 +56,11 @@ public class Order extends BaseEntity {
         this.orderPriceFen = orderPriceFen;
     }
 
-    public Set<Goods> getGoods() {
-        return goods;
+    public Set<OrderGoods> getOrderGoods() {
+        return orderGoods;
     }
 
-    public void setGoods(Set<Goods> goods) {
-        this.goods = goods;
+    public void setOrderGoods(Set<OrderGoods> orderGoods) {
+        this.orderGoods = orderGoods;
     }
 }

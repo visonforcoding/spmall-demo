@@ -6,6 +6,7 @@ import org.hibernate.annotations.Table;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(appliesTo = "goods", comment = "商品表")
@@ -32,6 +33,9 @@ public class Goods extends BaseEntity {
     private GoodsCat goodsCat;
 
     private String description;
+
+    @OneToMany(mappedBy = "goods")
+    private Set<OrderGoods> orderGoods;
 
     public String getName() {
         return name;
